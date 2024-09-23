@@ -1,6 +1,5 @@
 const { commentModel } = require('../models');
 
-// Obtener todos los comentarios
 const getAllComments = async (req, res) => {
   try {
     const comments = await commentModel.findAll();
@@ -10,23 +9,6 @@ const getAllComments = async (req, res) => {
   }
 };
 
-// Obtener un comentario por ID
-const getCommentById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const comment = await commentModel.findByPk(id);
-
-    if (!comment) {
-      return res.status(404).json({ message: 'Comentario no encontrado' });
-    }
-
-    res.status(200).json(comment);
-  } catch (error) {
-    res.status(500).json({ message: 'Error al obtener el comentario', error });
-  }
-};
-
-// Crear un nuevo comentario
 const createComment = async (req, res) => {
   try {
     const { body_comment, id_post_comment, id_pet_comment } = req.body;
@@ -43,7 +25,6 @@ const createComment = async (req, res) => {
   }
 };
 
-// Actualizar un comentario existente
 const updateComment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -65,7 +46,6 @@ const updateComment = async (req, res) => {
   }
 };
 
-// Eliminar un comentario
 const deleteComment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -84,7 +64,6 @@ const deleteComment = async (req, res) => {
 
 module.exports = {
   getAllComments,
-  getCommentById,
   createComment,
   updateComment,
   deleteComment,
